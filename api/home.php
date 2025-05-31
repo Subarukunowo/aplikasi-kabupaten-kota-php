@@ -1,25 +1,24 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+class KabKota {
+    private $conn;
 
-Header('Access-Control-Allow-Origin: *');
-Header('Content-Type: application/json');
-Header('Access-Control-Allow-Method: GET');
+    public function __construct($db) {
+        $this->conn = $db;
+    }
 
-include_once('../config/config.php');
-include_once('../model/kabkota.php');
-
-$database = new Database;
-$db = $database->connect();
-
-$kabkota = new KabKota($db);
-$data = $kabkota->home();
-
-echo json_encode(['message' => $data, 'data' => null]);
-if (is_null($data)) {
-    http_response_code(404);
-    echo json_encode(['message' => 'Data not found', 'data' => null]);
-} else {
-    http_response_code(200);
-    echo json_encode(['message' => 'Data retrieved successfully', 'data' => $data]);
+    public function home() {
+        return [
+            "message" => "Selamat datang di API Kabupaten Kota versi 1.0!",
+            "data" => null
+        ];
+    }
 }
+
+// Contoh penggunaan
+header('Content-Type: application/json');
+
+$db = null; // atau koneksi database jika ada
+$kabkota = new KabKota($db);
+
+$response = $kabkota->home();
+echo json_encode($response);

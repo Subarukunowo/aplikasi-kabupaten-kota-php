@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: DELETE');
 
-include_once('confdb.config.php');
+include_once('conf/db_config.php');
 include_once('model/kabkota.php');
 
 $database = new Database;

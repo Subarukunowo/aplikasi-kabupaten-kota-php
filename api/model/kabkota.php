@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include_once '../conf/db_config.php';
+include_once 'conf/db_config.php';
 
 class KabKota{
     public $id;

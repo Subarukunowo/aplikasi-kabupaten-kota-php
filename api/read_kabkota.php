@@ -6,8 +6,9 @@ Header('Access-Control-Allow-Origin: *');
 Header('Content-Type: application/json');
 Header('Access-Control-Allow-Method: GET');
 
-include_once('../config/config.php');
-include_once('../model/kabkota.php');
+include_once('conf/db_config.php');
+include_once('model/kabkota.php');
+
 
 $database = new Database;
 $db = $database->connect();
