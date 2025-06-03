@@ -33,11 +33,11 @@ while ($row = mysqli_fetch_assoc($result)) {
         <h3 class="card-title">Daftar Kabupaten/Kota</h3>
       </div>
       <div class="card-body">
-        <a href="#" class="btn btn-primary mb-3">
+        <a href="index.php?page=tambah_kabkota" type="button" class="btn btn-primary mb-3">
           <i class="fa fa-plus"></i>&nbsp;&nbsp;Tambah Data
         </a>
         <div class="table-responsive">
-          <table id="kabkota" class="table table-bordered table-striped">
+          <table id="tb_kab_kota" class="table table-bordered table-striped">
             <thead>
               <tr>
                 <th>#</th>
@@ -66,80 +66,82 @@ while ($row = mysqli_fetch_assoc($result)) {
                   <img src="<?= $logo_src ?>" style="width: 80px;" />
                 </td>
                 <td class="text-center" style="white-space: nowrap;">
-                  <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal<?= $row['id'] ?>">
-                    <i class="fas fa-eye"></i>
-                  </button>
-                  <a href="#" class="btn btn-success btn-sm" title="Ubah Data">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a href="#" class="btn btn-danger btn-sm" title="Hapus Data" onclick="return confirm('Apakah anda yakin?')">
-                    <i class="fas fa-trash"></i>
-                  </a>
+                  <!-- TOMBOL AKSI YANG DIMINTA -->
+                  <div style="text-align: center; white-space: nowrap;">
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal<?= $row['id'] ?>">
+                      <i class="fas fa-eye"></i>
+                    </button>
+                    <a href="index.php?page=ubah_kabkota&id=<?=$row['id']?>" class="btn btn-success btn-sm" role="button" title="Ubah Data">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="proses/kabkota/proses_hapus_kabkota.php?id=<?=$row['id']?>" class="btn btn-danger btn-sm" role="button" title="Hapus Data" onclick="return confirm('Apakah anda yakin?')">
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </div>
                 </td>
               </tr>
 
               <!-- Modal Detail -->
-        <!-- Modal Detail -->
-<div class="modal fade" id="modal<?= $row['id'] ?>">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Detail Data <?= $row["kabupaten_kota"] ?></h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 text-center mb-3">
-              <?php
-                $peta = $row["url_peta_wilayah"];
-                $peta_src = ($peta == null || $peta == '') ? "image/peta/indonesia.svg" : $peta;
-              ?>
-              <img src="<?= $peta_src ?>" style="width: 400px;" />
-            </div>
+              <div class="modal fade" id="modal<?= $row['id'] ?>">
+                <div class="modal-dialog modal-dialog-scrollable">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Detail Data <?= $row["kabupaten_kota"] ?></h5>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-12 text-center mb-3">
+                            <?php
+                              $peta = $row["url_peta_wilayah"];
+                              $peta_src = ($peta == null || $peta == '') ? "image/peta/indonesia.svg" : $peta;
+                            ?>
+                            <img src="<?= $peta_src ?>" style="width: 400px;" />
+                          </div>
 
-            <div class="col-sm-5 col-6">Pusat Pemerintahan</div>
-            <div class="col-sm-7 col-6"><?= $row["pusat_pemerintahan"] ?></div>
+                          <div class="col-sm-5 col-6">Pusat Pemerintahan</div>
+                          <div class="col-sm-7 col-6"><?= $row["pusat_pemerintahan"] ?></div>
 
-            <div class="col-sm-5 col-6">Kepala Daerah</div>
-            <div class="col-sm-7 col-6"><?= $row["bupati_walikota"] ?></div>
+                          <div class="col-sm-5 col-6">Kepala Daerah</div>
+                          <div class="col-sm-7 col-6"><?= $row["bupati_walikota"] ?></div>
 
-            <div class="col-sm-5 col-6">Tanggal Berdiri</div>
-            <div class="col-sm-7 col-6"><?= $row["tanggal_berdiri"] ?></div>
+                          <div class="col-sm-5 col-6">Tanggal Berdiri</div>
+                          <div class="col-sm-7 col-6"><?= $row["tanggal_berdiri"] ?></div>
 
-            <div class="col-sm-5 col-6">Luas Wilayah</div>
-            <div class="col-sm-7 col-6"><?= $row["luas_wilayah"] ?> m²</div>
+                          <div class="col-sm-5 col-6">Luas Wilayah</div>
+                          <div class="col-sm-7 col-6"><?= $row["luas_wilayah"] ?> m²</div>
 
-            <div class="col-sm-5 col-6">Jumlah Penduduk</div>
-            <div class="col-sm-7 col-6"><?= $row["jumlah_penduduk"] ?> jiwa</div>
+                          <div class="col-sm-5 col-6">Jumlah Penduduk</div>
+                          <div class="col-sm-7 col-6"><?= $row["jumlah_penduduk"] ?> jiwa</div>
 
-            <div class="col-sm-5 col-6">Jumlah Kecamatan</div>
-            <div class="col-sm-7 col-6"><?= $row["jumlah_kecamatan"] ?></div>
+                          <div class="col-sm-5 col-6">Jumlah Kecamatan</div>
+                          <div class="col-sm-7 col-6"><?= $row["jumlah_kecamatan"] ?></div>
 
-            <div class="col-sm-5 col-6">Jumlah Kelurahan</div>
-            <div class="col-sm-7 col-6"><?= $row["jumlah_kelurahan"] ?></div>
+                          <div class="col-sm-5 col-6">Jumlah Kelurahan</div>
+                          <div class="col-sm-7 col-6"><?= $row["jumlah_kelurahan"] ?></div>
 
-            <div class="col-sm-5 col-6">Jumlah Desa</div>
-            <div class="col-sm-7 col-6"><?= $row["jumlah_desa"] ?></div>
+                          <div class="col-sm-5 col-6">Jumlah Desa</div>
+                          <div class="col-sm-7 col-6"><?= $row["jumlah_desa"] ?></div>
 
-            <div class="col-sm-5 col-6">Logo</div>
-            <div class="col-sm-7 col-6">
-              <img src="<?= $logo_src ?>" style="width: 80px;">
-            </div>
+                          <div class="col-sm-5 col-6">Logo</div>
+                          <div class="col-sm-7 col-6">
+                            <img src="<?= $logo_src ?>" style="width: 80px;">
+                          </div>
 
-           <div class="col-sm-5 col-6">Link URL Logo</div>
-<div class="col-sm-7 col-6">
-  <a href="<?= $logo_src ?>" target="_blank"><?= $row["kabupaten_kota"] ?></a>
-</div>
+                          <div class="col-sm-5 col-6">Link URL Logo</div>
+                          <div class="col-sm-7 col-6">
+                            <a href="<?= $logo_src ?>" target="_blank"><?= $row["kabupaten_kota"] ?></a>
+                          </div>
 
-            <div class="col-sm-5 col-6">Deskripsi Singkat</div>
-            <div class="col-sm-7 col-6"><?= $row["deskripsi"] ?></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                          <div class="col-sm-5 col-6">Deskripsi Singkat</div>
+                          <div class="col-sm-7 col-6"><?= $row["deskripsi"] ?></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <?php endforeach; ?>
             </tbody>
           </table>

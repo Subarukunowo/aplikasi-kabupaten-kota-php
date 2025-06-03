@@ -11,7 +11,31 @@ if (isset($_GET['page'])) {
         case 'data_kabkota':
             include 'page/data_kabkota.php';
             break;
-
+             case 'tambah_kabkota':
+            include 'page/tambah_kabkota.php';
+            break;
+                case 'ubah_kabkota':
+            include 'page/ubah_kabkota.php';
+            break;
+            case 'data_user':
+                if($_SESSION['role'] == 'admin') {
+                include 'page/user/data_user.php'; } else{
+                    include 'page/401.php';
+                }
+                break;
+                case 'tambah_user':
+                     if($_SESSION['role'] == 'admin') {
+            include 'page/user/tambah_data_user.php'; } else{
+                    include 'page/401.php';
+                }
+            
+            break;
+            case 'ubah_user':
+                if($_SESSION['role'] == 'admin') {
+            include 'page/user/ubah_user.php'; } else{
+                    include 'page/401.php';
+                }
+            break;
         // Tambahkan case lain jika perlu
         default:
             include 'page/beranda.php';
